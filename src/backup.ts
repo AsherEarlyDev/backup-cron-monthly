@@ -3,7 +3,7 @@ import { DeleteObjectCommand, ListObjectsCommand, PutObjectCommand, S3Client, S3
 import { createReadStream } from "fs";
 import { env } from "./env";
 const { Logtail } = require("@logtail/node");
-const logtail = new Logtail("ZpUA5eyVBQXQwy8kLtno83tT>");
+const logtail = new Logtail("ZpUA5eyVBQXQwy8kLtno83tT");
 
 const uploadToS3 = async ({ name, path }: {name: string, path: string}) => {
   console.log("Uploading backup to S3...");
@@ -80,6 +80,7 @@ const dumpToFile = async (path: string) => {
 
   console.log("DB dumped to file...");
   logtail.info("DB dumped to file...");
+  logtail.flush()
 }
 
 export const backup = async () => {
@@ -96,4 +97,5 @@ export const backup = async () => {
 
   console.log("DB backup complete...")
   logtail.info("DB backup complete...");
+  logtail.flush()
 }
